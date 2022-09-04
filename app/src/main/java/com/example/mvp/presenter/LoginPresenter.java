@@ -18,20 +18,30 @@ public class LoginPresenter {
     private LoginInterface loginInterface;
     private ArrayList<User> listUser;
 
-    public LoginPresenter(Activity activity) {
+    public LoginPresenter(LoginInterface loginInterface, Activity activity) {
+        this.loginInterface = loginInterface;
         if (Database.getConnect(activity)) {
             listUser = getListUser(activity);
-            Toast.makeText(activity, "" +listUser.size(), Toast.LENGTH_LONG).show();
         }
     }
 
 
-    public void Login(User user) {
+    public void login(User user) {
         if (user.isValidEmail() && user.isValidPassword()) {
-            loginInterface.loginSuccess();
-        } else {
+            for (int i = 0; i < listUser.size(); i++) {
+                System.out.println(user.getEmail());
+                System.out.println(listUser.get(i).getEmail());
+                if (user.getEmail().equals(listUser.get(i).getEmail())) {
+                    if (user.getPassword().equals(listUser.get(i).getPassword()))
+                        loginInterface.loginSuccess();
+                    else
+                        loginInterface.loginPasswordError();
+                } else
+                    loginInterface.loginEmailError();
+            }
+        } else
             loginInterface.loginError();
-        }
+
     }
 
     private ArrayList<User> getListUser(Activity activity) {
@@ -48,6 +58,7 @@ public class LoginPresenter {
                 listUser.add(user);
             }
             cursor.close();
+            database.close();
         } catch (Exception e) {
             Toast.makeText(activity, e.getMessage(), Toast.LENGTH_LONG).show();
         }

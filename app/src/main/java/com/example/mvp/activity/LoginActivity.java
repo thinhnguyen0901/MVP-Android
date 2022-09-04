@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -16,19 +17,27 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.mvp.R;
 import com.example.mvp.data.Database;
+import com.example.mvp.interfaces.LoginInterface;
 import com.example.mvp.model.User;
 import com.example.mvp.presenter.LoginPresenter;
 
 import java.util.ArrayList;
 
 
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity implements LoginInterface {
+
+    private LoginPresenter loginPresenter;
+    private EditText edtEmail;
+    private EditText edtPassword;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        LoginPresenter loginPresenter =new LoginPresenter(this);
+        loginPresenter = new LoginPresenter(this, this);
+        edtEmail = findViewById(R.id.edtEmail);
+        edtPassword = findViewById(R.id.edtPassword);
+
     }
 
     public void openDialogForgetPassword(View view) {
@@ -60,10 +69,35 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void openProfile(View view) {
-        startActivity(new Intent(this, ProfileActivity.class));
+        String srtEmail = edtEmail.getText().toString().trim();
+        String srtPassword = edtPassword.getText().toString().trim();
+        User user = new User(srtEmail, srtPassword);
+        loginPresenter.login(user);
     }
 
     public void openRegister(View view) {
         startActivity(new Intent(this, RegisterActivity.class));
+    }
+
+    @Override
+    public void loginSuccess() {
+        startActivity(new Intent(this, ProfileActivity.class));
+    }
+
+    @Override
+    public void loginError() {
+        Toast.makeText(this, R.string.announce_error_login, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void loginEmailError() {
+        edtEmail.setError("Email không tồn tại!");
+
+    }
+
+    @Override
+    public void loginPasswordError() {
+        edtPassword.setError("Mật khẩu không đúng!");
+
     }
 }

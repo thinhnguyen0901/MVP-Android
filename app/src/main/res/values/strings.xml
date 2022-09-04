@@ -10,5 +10,6 @@
     <string name="lb_welcome">Xin Chào</string>
     <string name="lb_title">Vui lòng chọn chức năng bên dưới</string>
     <string name="lb_signin_question">Bạn đã có tài khoản? Đăng nhập ngay!</string>
+    <string name="announce_error_login"><b>Email</b> hoặc <b>mật khẩu</b> không hợp lệ.</string>
 
 </resources>

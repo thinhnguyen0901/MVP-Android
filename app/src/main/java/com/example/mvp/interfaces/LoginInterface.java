@@ -4,4 +4,8 @@ public interface LoginInterface {
     void loginSuccess();
 
     void loginError();
+
+    void loginEmailError();
+
+    void loginPasswordError();
 }

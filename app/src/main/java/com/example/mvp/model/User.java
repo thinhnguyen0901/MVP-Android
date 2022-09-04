@@ -37,7 +37,9 @@ public class User {
     }
 
     public boolean isValidPassword() {
+        System.out.println(password.length());
         return !TextUtils.isEmpty(password) && password.length() >= 6;
+
     }
 }
 
