@@ -10,6 +10,10 @@ public class User {
     public User() {
     }
 
+    public User(String email) {
+        this.email = email;
+    }
+
     public User(String email, String password) {
 
         this.email = email;
@@ -37,7 +41,6 @@ public class User {
     }
 
     public boolean isValidPassword() {
-        System.out.println(password.length());
         return !TextUtils.isEmpty(password) && password.length() >= 6;
 
     }

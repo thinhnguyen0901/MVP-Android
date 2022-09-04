@@ -28,24 +28,6 @@ public class LoginPresenter implements LoginInterface.Presenter {
         viewLoginInterface = view;
     }
 
-
-    //    public void login(User user) {
-//        if (user.isValidEmail() && user.isValidPassword()) {
-//            for (int i = 0; i < listUser.size(); i++) {
-//                System.out.println(user.getEmail());
-//                System.out.println(listUser.get(i).getEmail());
-//                if (user.getEmail().equals(listUser.get(i).getEmail())) {
-//                    if (user.getPassword().equals(listUser.get(i).getPassword()))
-//                        loginInterface.loginSuccess();
-//                    else
-//                        loginInterface.loginPasswordError();
-//                } else
-//                    loginInterface.loginEmailError();
-//            }
-//        } else
-//            loginInterface.loginError();
-//
-//    }
     @Override
     public void handleSignIn(User user) {
         if (user.isValidEmail() && user.isValidPassword()) {

@@ -1,6 +1,7 @@
 package com.example.mvp.presenter;
 
 import android.app.Activity;
+import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
@@ -15,11 +16,13 @@ import java.util.ArrayList;
 public class RegisterPresenter implements RegisterInterface.Presenter {
 
     private ArrayList<String> listUserEmail;
+    private Activity activity;
     private RegisterInterface.View viewRegisterInterface;
 
     public RegisterPresenter(Activity activity) {
+        this.activity = activity;
         if (Database.getConnect(activity)) {
-            listUserEmail = getListUserEmail(activity);
+            listUserEmail = getListUserEmail();
         }
     }
 
@@ -40,16 +43,17 @@ public class RegisterPresenter implements RegisterInterface.Presenter {
                 }
             }
             if (exitEmail) {
-                if (!user.getPassword().equals(rePassword))
-                    viewRegisterInterface.registerRePasswordError();
-                else
+                if (user.getPassword().equals(rePassword)) {
                     viewRegisterInterface.registerSuccess();
+                    insertDBKetQuaThi(user);
+                } else
+                    viewRegisterInterface.registerRePasswordError();
             }
         } else
             viewRegisterInterface.registerError();
     }
 
-    private ArrayList<String> getListUserEmail(Activity activity) {
+    private ArrayList<String> getListUserEmail() {
         ArrayList<String> listUserEmail = new ArrayList<>();
         final String sql = "select user_email from user";
         try {
@@ -66,5 +70,18 @@ public class RegisterPresenter implements RegisterInterface.Presenter {
             Toast.makeText(activity, e.getMessage(), Toast.LENGTH_SHORT).show();
         }
         return listUserEmail;
+    }
+
+    private void insertDBKetQuaThi(User user) {
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("user_email", user.getEmail());
+        contentValues.put("user_password", user.getPassword());
+        try {
+            SQLiteDatabase db = Database.initDatabase(activity);
+            db.insert("user", null, contentValues);
+            db.close();
+        } catch (SQLException e) {
+            Toast.makeText(activity, "Lỗi kết nối tới CSDL", Toast.LENGTH_SHORT).show();
+        }
     }
 }
