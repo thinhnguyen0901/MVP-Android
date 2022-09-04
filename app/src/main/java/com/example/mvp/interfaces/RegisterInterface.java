@@ -8,9 +8,13 @@ public interface RegisterInterface {
     interface View {
         void registerSuccess();
 
-        void registerError();
+        void registerEmailError();
+
+        void registerPasswordError();
 
         void registerEmailExit();
+
+        void registerError();
 
         void registerRePasswordError();
     }

@@ -21,7 +21,7 @@
             android:padding="1dp"
             android:onClick="actionLogout"
             android:src="@drawable/ic_logout"
-            tools:ignore="ContentDescription" />
+            tools:ignore="ContentDescription,OnClick" />
 
 
         <LinearLayout

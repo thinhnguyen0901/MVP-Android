@@ -11,5 +11,14 @@
     <string name="lb_title">Vui lòng chọn chức năng bên dưới</string>
     <string name="lb_signin_question">Bạn đã có tài khoản? Đăng nhập ngay!</string>
     <string name="announce_error_login"><b>Email</b> hoặc <b>Mật khẩu</b> không hợp lệ</string>
+    <string name="lb_full_name">Nguyen Duc Thinh</string>
+    <string name="lb_date_of_birth">10/09/2001</string>
+    <string name="lb_add_short">Ba Dinh District, Ha Noi City</string>
+    <string name="lb_add_long">Giang Vo Street, \nBa Dinh  District,\nHa Noi City \nVietNam</string>
+    <string name="lb_email_work">thinhnguyen10901@gmail.com</string>
+    <string name="lb_add">Address</string>
+    <string name="lb_header">Personal Info</string>
+    <string name="lb_phone_work">0865301750</string>
+    <string name="lb_phone">Mobile</string>
 
 </resources>

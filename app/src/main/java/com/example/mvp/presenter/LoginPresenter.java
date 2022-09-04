@@ -10,12 +10,11 @@ import com.example.mvp.data.Database;
 import com.example.mvp.interfaces.LoginInterface;
 import com.example.mvp.model.User;
 
-import java.sql.PreparedStatement;
 import java.util.ArrayList;
 
 public class LoginPresenter implements LoginInterface.Presenter {
 
-    private LoginInterface.View viewLoginInterface;
+    private LoginInterface.View view;
     private ArrayList<User> listUser;
 
     public LoginPresenter(Activity activity) {
@@ -25,7 +24,7 @@ public class LoginPresenter implements LoginInterface.Presenter {
     }
 
     public void setView(LoginInterface.View view) {
-        viewLoginInterface = view;
+        this.view = view;
     }
 
     @Override
@@ -33,15 +32,21 @@ public class LoginPresenter implements LoginInterface.Presenter {
         if (user.isValidEmail() && user.isValidPassword()) {
             for (int i = 0; i < listUser.size(); i++) {
                 if (user.getEmail().equals(listUser.get(i).getEmail())) {
-                    if (user.getPassword().equals(listUser.get(i).getPassword()))
-                        viewLoginInterface.loginSuccess();
-                    else
-                        viewLoginInterface.loginPasswordError();
+                    if (user.getPassword().equals(listUser.get(i).getPassword())) {
+                        view.loginSuccess();
+                    } else view.loginPasswordWrong();
+                    break;
                 } else
-                    viewLoginInterface.loginEmailError();
+                    view.loginNotEmailExit();
             }
-        } else
-            viewLoginInterface.loginError();
+        } else {
+            if (!user.isValidEmail() && !user.isValidPassword())
+                view.loginError();
+            else if (!user.isValidPassword())
+                view.loginPasswordError();
+            else if (!user.isValidEmail())
+                view.loginEmailError();
+        }
     }
 
     private ArrayList<User> getListUser(Activity activity) {

@@ -40,7 +40,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
-                    android:text="Address"
+                    android:text="@string/lb_add"
                     android:textColor="#F8554A4A"
                     android:textSize="16sp"
                     android:textStyle="bold|normal" />
@@ -73,7 +73,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="Hitech City MMts Station Park"
+                    android:text="@string/lb_add_short"
                     android:textColor="@color/black"
                     android:textSize="17sp"
                     android:textStyle="bold" />
@@ -82,7 +82,7 @@
                     android:id="@+id/detailAddress"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Bhagyanager Colony, \nMadhapur Hyderabad,\nTelangana \n500084"
+                    android:text="@string/lb_add_long"
                     android:textAlignment="textStart"
                     android:textColor="#ED5E5E5E"
                     android:textSize="13sp"

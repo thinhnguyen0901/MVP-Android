@@ -6,11 +6,15 @@ public interface LoginInterface {
     interface View {
         void loginSuccess();
 
-        void loginError();
+        void loginPasswordError();
 
         void loginEmailError();
 
-        void loginPasswordError();
+        void loginNotEmailExit();
+
+        void loginError();
+
+        void loginPasswordWrong();
     }
 
     interface Presenter {

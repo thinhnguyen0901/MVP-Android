@@ -17,7 +17,7 @@ public class RegisterPresenter implements RegisterInterface.Presenter {
 
     private ArrayList<String> listUserEmail;
     private Activity activity;
-    private RegisterInterface.View viewRegisterInterface;
+    private RegisterInterface.View view;
 
     public RegisterPresenter(Activity activity) {
         this.activity = activity;
@@ -27,30 +27,37 @@ public class RegisterPresenter implements RegisterInterface.Presenter {
     }
 
     public void setView(RegisterInterface.View view) {
-        viewRegisterInterface = view;
+        this.view = view;
     }
 
 
     @Override
     public void handleRegister(User user, String rePassword) {
-        boolean exitEmail = true;
+        boolean exitEmail = false;
         if (user.isValidEmail() && user.isValidPassword()) {
             for (int i = 0; i < listUserEmail.size(); i++) {
                 if (user.getEmail().equals(listUserEmail.get(i))) {
-                    viewRegisterInterface.registerEmailExit();
-                    exitEmail = false;
+                    view.registerEmailExit();
+                    exitEmail = true;
                     break;
                 }
             }
-            if (exitEmail) {
+            if (!exitEmail) {
                 if (user.getPassword().equals(rePassword)) {
-                    viewRegisterInterface.registerSuccess();
-                    insertDBKetQuaThi(user);
+                    view.registerSuccess();
+                    if (Database.getConnect(activity))
+                        insertDBKetQuaThi(user);
                 } else
-                    viewRegisterInterface.registerRePasswordError();
+                    view.registerRePasswordError();
             }
-        } else
-            viewRegisterInterface.registerError();
+        } else {
+            if (!user.isValidEmail() && !user.isValidPassword())
+                view.registerError();
+            else if (!user.isValidPassword())
+                view.registerPasswordError();
+            else if (!user.isValidEmail())
+                view.registerEmailError();
+        }
     }
 
     private ArrayList<String> getListUserEmail() {
@@ -81,7 +88,7 @@ public class RegisterPresenter implements RegisterInterface.Presenter {
             db.insert("user", null, contentValues);
             db.close();
         } catch (SQLException e) {
-            Toast.makeText(activity, "Lỗi kết nối tới CSDL", Toast.LENGTH_SHORT).show();
+            Toast.makeText(activity, "Lỗi kết nối tới CSDL" + e.getMessage(), Toast.LENGTH_SHORT).show();
         }
     }
 }

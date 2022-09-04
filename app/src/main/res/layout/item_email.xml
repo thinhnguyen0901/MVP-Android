@@ -28,7 +28,7 @@
                 android:layout_height="30dp"
                 card_view:ignore="ContentDescription" />
             <TextView
-                android:text="Email"
+                android:text="@string/lb_email"
                 android:layout_marginStart="10dp"
                 android:textSize="14sp"
                 android:textStyle="bold"
@@ -41,7 +41,7 @@
         </LinearLayout>
         <TextView
             android:id="@+id/email"
-            android:text="malakinfoapp@gmail.com"
+            android:text="@string/lb_email_work"
             android:textStyle="bold"
             android:textColor="@color/black"
             android:textSize="18sp"

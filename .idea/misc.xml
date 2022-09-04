@@ -23,7 +23,7 @@
         <entry key="..\:/login_mvp/app/src/main/res/layout-v21/item_image.xml" value="0.22447916666666667" />
         <entry key="..\:/login_mvp/app/src/main/res/layout/activity_login.xml" value="0.36666666666666664" />
         <entry key="..\:/login_mvp/app/src/main/res/layout/activity_main.xml" value="0.18802083333333333" />
-        <entry key="..\:/login_mvp/app/src/main/res/layout/activity_profile.xml" value="0.22447916666666667" />
+        <entry key="..\:/login_mvp/app/src/main/res/layout/activity_profile.xml" value="0.25" />
         <entry key="..\:/login_mvp/app/src/main/res/layout/activity_register.xml" value="0.18802083333333333" />
         <entry key="..\:/login_mvp/app/src/main/res/layout/dialog.xml" value="0.36666666666666664" />
         <entry key="..\:/login_mvp/app/src/main/res/layout/item_add.xml" value="0.36666666666666664" />
@@ -31,6 +31,7 @@
         <entry key="..\:/login_mvp/app/src/main/res/layout/item_email.xml" value="0.36666666666666664" />
         <entry key="..\:/login_mvp/app/src/main/res/layout/item_image.xml" value="0.36666666666666664" />
         <entry key="..\:/login_mvp/app/src/main/res/layout/item_info.xml" value="0.36666666666666664" />
+        <entry key="..\:/login_mvp/app/src/main/res/layout/item_phone.xml" value="0.22447916666666667" />
         <entry key="..\:/login_mvp/app/src/main/res/layout/login.xml" value="0.36666666666666664" />
         <entry key="..\:/login_mvp/app/src/main/res/layout/profile.xml" value="0.30085470085470084" />
         <entry key="..\:/login_mvp/app/src/main/res/layout/register.xml" value="0.36666666666666664" />

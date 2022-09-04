@@ -80,21 +80,40 @@ public class LoginActivity extends AppCompatActivity implements LoginInterface.V
     }
 
     @Override
-    public void loginError() {
-        edtEmail.setError("Email không hợp lệ");
+    public void loginPasswordError() {
         edtPassword.setError("Mật khẩu không hợp lệ");
     }
 
     @Override
     public void loginEmailError() {
-        edtEmail.setError("Email không tồn tại!");
+        edtEmail.setError("Email không hợp lệ");
 
     }
 
     @Override
-    public void loginPasswordError() {
-        edtPassword.setError("Mật khẩu không đúng!");
+    public void loginNotEmailExit() {
+        edtEmail.setError("Email không tồn tại!");
+    }
 
+    @Override
+    public void loginError() {
+        loginEmailError();
+        loginPasswordError();
+    }
+
+    @Override
+    public void loginPasswordWrong() {
+        edtPassword.setError("Mật khẩu không đúng");
+    }
+
+    @Override
+    public void emailError() {
+        edtEmailDialog.setError("Email không hợp lệ");
+    }
+
+    @Override
+    public void sendSuccess() {
+        Toast.makeText(this, "Gửi thành công đến " + edtEmailDialog.getText().toString(), Toast.LENGTH_LONG).show();
     }
 
     public void openDialogForgetPassword(View view) {
@@ -127,13 +146,4 @@ public class LoginActivity extends AppCompatActivity implements LoginInterface.V
         startActivity(new Intent(this, RegisterActivity.class));
     }
 
-    @Override
-    public void emailError() {
-        edtEmailDialog.setError("Email không hợp lệ");
-    }
-
-    @Override
-    public void sendSuccess() {
-        Toast.makeText(this, "Gửi thành công đến " + edtEmailDialog.getText().toString(), Toast.LENGTH_LONG).show();
-    }
 }

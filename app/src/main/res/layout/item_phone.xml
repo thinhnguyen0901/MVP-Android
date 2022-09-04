@@ -25,7 +25,7 @@
                 android:layout_width="30dp"
                 android:layout_height="30dp"/>
             <TextView
-                android:text="Mobile"
+                android:text="@string/lb_phone"
                 android:layout_marginStart="10dp"
                 android:textSize="14sp"
                 android:textStyle="bold"
@@ -38,7 +38,7 @@
         </LinearLayout>
         <TextView
             android:id="@+id/phone"
-            android:text="+91 98000000000"
+            android:text="@string/lb_phone_work"
             android:textStyle="bold"
             android:textColor="@color/black"
             android:textSize="18sp"

@@ -60,14 +60,24 @@ public class RegisterActivity extends AppCompatActivity implements RegisterInter
     }
 
     @Override
-    public void registerError() {
+    public void registerEmailError() {
         edtEmail.setError("Email không hợp lệ");
+    }
+
+    @Override
+    public void registerPasswordError() {
         edtPassword.setError("Mật khẩu không hợp lệ");
     }
 
     @Override
     public void registerEmailExit() {
         edtEmail.setError("Email đã tồn tại");
+    }
+
+    @Override
+    public void registerError() {
+        registerEmailError();
+        registerPasswordError();
     }
 
     @Override
