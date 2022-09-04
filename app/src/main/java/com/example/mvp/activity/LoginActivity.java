@@ -58,13 +58,14 @@ public class LoginActivity extends AppCompatActivity implements LoginInterface.V
 
     @Override
     public void loginSuccess() {
-        finish();
         startActivity(new Intent(this, ProfileActivity.class));
+        finish();
     }
 
     @Override
     public void loginError() {
-        Toast.makeText(this, R.string.announce_error_login, Toast.LENGTH_SHORT).show();
+        edtEmail.setError("Email không hợp lệ");
+        edtPassword.setError("Mật khẩu không hợp lệ");
     }
 
     @Override

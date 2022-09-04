@@ -56,11 +56,13 @@ public class RegisterActivity extends AppCompatActivity implements RegisterInter
     @Override
     public void registerSuccess() {
         startActivity(new Intent(this, MainActivity.class));
+        finish();
     }
 
     @Override
     public void registerError() {
-        Toast.makeText(this, R.string.announce_error_login, Toast.LENGTH_SHORT).show();
+        edtEmail.setError("Email không hợp lệ");
+        edtPassword.setError("Mật khẩu không hợp lệ");
     }
 
     @Override
