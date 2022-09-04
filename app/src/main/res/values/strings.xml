@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">Login MVP</string>
+    <string name="lb_login">Đăng nhập</string>
+    <string name="lb_signup">Đăng ký</string>
+    <string name="lb_email">Email</string>
+    <string name="lb_password">Mật khẩu</string>
+    <string name="lb_confirm_password">Nhập lại mật khẩu</string>
+    <string name="lb_forget_password">Quên mật khẩu</string>
+    <string name="lb_signup_question">Bạn không có tài khoản? Đăng ký ngay!</string>
+    <string name="lb_welcome">Xin Chào</string>
+    <string name="lb_title">Vui lòng chọn chức năng bên dưới</string>
+    <string name="lb_signin_question">Bạn đã có tài khoản? Đăng nhập ngay!</string>
+
+</resources>
