@@ -41,12 +41,13 @@ public class Database {
         return activity.openOrCreateDatabase(databaseName, Context.MODE_PRIVATE, null);
     }
 
+
     public static boolean getConnect(Activity activity) {
         try {
             Database.initDatabase(activity);
             return true;
         } catch (Exception e) {
-            Toast.makeText(activity, e.getMessage(), Toast.LENGTH_LONG).show();
+            Toast.makeText(activity, "Lỗi kết nối tới CSDL: " + e.getMessage(), Toast.LENGTH_SHORT).show();
             return false;
         }
     }

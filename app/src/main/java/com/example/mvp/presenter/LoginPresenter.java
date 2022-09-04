@@ -13,35 +13,53 @@ import com.example.mvp.model.User;
 import java.sql.PreparedStatement;
 import java.util.ArrayList;
 
-public class LoginPresenter {
+public class LoginPresenter implements LoginInterface.Presenter {
 
-    private LoginInterface loginInterface;
+    private LoginInterface.View viewLoginInterface;
     private ArrayList<User> listUser;
 
-    public LoginPresenter(LoginInterface loginInterface, Activity activity) {
-        this.loginInterface = loginInterface;
+    public LoginPresenter(Activity activity) {
         if (Database.getConnect(activity)) {
             listUser = getListUser(activity);
         }
     }
 
+    public void setView(LoginInterface.View view) {
+        viewLoginInterface = view;
+    }
 
-    public void login(User user) {
+
+    //    public void login(User user) {
+//        if (user.isValidEmail() && user.isValidPassword()) {
+//            for (int i = 0; i < listUser.size(); i++) {
+//                System.out.println(user.getEmail());
+//                System.out.println(listUser.get(i).getEmail());
+//                if (user.getEmail().equals(listUser.get(i).getEmail())) {
+//                    if (user.getPassword().equals(listUser.get(i).getPassword()))
+//                        loginInterface.loginSuccess();
+//                    else
+//                        loginInterface.loginPasswordError();
+//                } else
+//                    loginInterface.loginEmailError();
+//            }
+//        } else
+//            loginInterface.loginError();
+//
+//    }
+    @Override
+    public void handleSignIn(User user) {
         if (user.isValidEmail() && user.isValidPassword()) {
             for (int i = 0; i < listUser.size(); i++) {
-                System.out.println(user.getEmail());
-                System.out.println(listUser.get(i).getEmail());
                 if (user.getEmail().equals(listUser.get(i).getEmail())) {
                     if (user.getPassword().equals(listUser.get(i).getPassword()))
-                        loginInterface.loginSuccess();
+                        viewLoginInterface.loginSuccess();
                     else
-                        loginInterface.loginPasswordError();
+                        viewLoginInterface.loginPasswordError();
                 } else
-                    loginInterface.loginEmailError();
+                    viewLoginInterface.loginEmailError();
             }
         } else
-            loginInterface.loginError();
-
+            viewLoginInterface.loginError();
     }
 
     private ArrayList<User> getListUser(Activity activity) {
@@ -59,7 +77,7 @@ public class LoginPresenter {
             }
             cursor.close();
             database.close();
-        } catch (Exception e) {
+        } catch (SQLException e) {
             Toast.makeText(activity, e.getMessage(), Toast.LENGTH_LONG).show();
         }
         return listUser;

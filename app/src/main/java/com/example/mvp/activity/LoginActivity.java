@@ -24,7 +24,7 @@ import com.example.mvp.presenter.LoginPresenter;
 import java.util.ArrayList;
 
 
-public class LoginActivity extends AppCompatActivity implements LoginInterface {
+public class LoginActivity extends AppCompatActivity implements LoginInterface.View {
 
     private LoginPresenter loginPresenter;
     private EditText edtEmail;
@@ -34,9 +34,48 @@ public class LoginActivity extends AppCompatActivity implements LoginInterface {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        loginPresenter = new LoginPresenter(this, this);
+        initView();
+        initPresenter();
+    }
+
+    private void initView() {
         edtEmail = findViewById(R.id.edtEmail);
         edtPassword = findViewById(R.id.edtPassword);
+    }
+
+    private void initPresenter() {
+        loginPresenter = new LoginPresenter(this);
+        loginPresenter.setView(this);
+    }
+
+
+    public void openProfile(View view) {
+        String srtEmail = edtEmail.getText().toString().trim();
+        String srtPassword = edtPassword.getText().toString().trim();
+        User user = new User(srtEmail, srtPassword);
+        loginPresenter.handleSignIn(user);
+    }
+
+    @Override
+    public void loginSuccess() {
+        finish();
+        startActivity(new Intent(this, ProfileActivity.class));
+    }
+
+    @Override
+    public void loginError() {
+        Toast.makeText(this, R.string.announce_error_login, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void loginEmailError() {
+        edtEmail.setError("Email không tồn tại!");
+
+    }
+
+    @Override
+    public void loginPasswordError() {
+        edtPassword.setError("Mật khẩu không đúng!");
 
     }
 
@@ -68,36 +107,7 @@ public class LoginActivity extends AppCompatActivity implements LoginInterface {
 
     }
 
-    public void openProfile(View view) {
-        String srtEmail = edtEmail.getText().toString().trim();
-        String srtPassword = edtPassword.getText().toString().trim();
-        User user = new User(srtEmail, srtPassword);
-        loginPresenter.login(user);
-    }
-
     public void openRegister(View view) {
         startActivity(new Intent(this, RegisterActivity.class));
-    }
-
-    @Override
-    public void loginSuccess() {
-        startActivity(new Intent(this, ProfileActivity.class));
-    }
-
-    @Override
-    public void loginError() {
-        Toast.makeText(this, R.string.announce_error_login, Toast.LENGTH_SHORT).show();
-    }
-
-    @Override
-    public void loginEmailError() {
-        edtEmail.setError("Email không tồn tại!");
-
-    }
-
-    @Override
-    public void loginPasswordError() {
-        edtPassword.setError("Mật khẩu không đúng!");
-
     }
 }
